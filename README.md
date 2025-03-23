@@ -4,7 +4,7 @@
 - Le lien figma (regroupant le wireframe mobile, web, design system ainsi que le prototypage)
 - L'API
 - La BDD sql
-- Le src
+- Le code complet
 - Le compte rendu de la SAE
 - Les diagrammes (MCD, classe, cas d'utilisation)
 
