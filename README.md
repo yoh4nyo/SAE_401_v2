@@ -23,7 +23,7 @@
 - Mathias Rakotomavo
 
 ## Lien vers le projet hébergé
-- [Lien vers le site](https://stylish.alwaysdata.net/php/login.php)
+- [Lien vers le site](https://yoh4nyo.github.io/SAE_401_v2/)
 - [Lien vers le dépôt GitHub](https://github.com/yoh4nyo/SAE401)
 
 ## FIGMA
