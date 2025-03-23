@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des avis</title>
+    <link href="/app_e2d/src/app/component/admin-avis/admin-avis.component.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="header1">
+            <span>
+                <i class="bi bi-person-fill" style="font-weight: normal;"></i>
+                <a aria-current="page" (click)="navigateToExamPage()" class="btn-link text-decoration-none" style="font-weight: normal;">Mes Exams</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-chat-left-dots mx-1" style="font-weight: normal;"></i>  
+                <a aria-current="page" (click)="navigateToStatsPage()" class="btn-link text-decoration-none" style="font-weight: normal;">Mes Statistiques</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-chat-left-dots mx-1"></i>  
+                <a aria-current="page" (click)="navigateToAvisPage()" class="btn-link text-decoration-none">Mes Avis</a>
+            </span>
+
+            <div class="overlay" [class.show]="showPopup" (click)="togglePopup()"></div>
+            <div class="popup" [class.show]="showPopup">
+                <h2 class="mb-4 text-center">Ajouter une Avis</h2>
+                <form [formGroup]="ajoutform" (ngSubmit)="Ajouter()">
+                      <div class="formGroup">
+                        <label for="evaluation">Évaluation</label>
+                        <select class="form-control" id="evaluation" formControlName="evaluation" required>
+                            <option value="" disabled selected>Évaluation</option>
+                            <option value="1">1 étoile</option>
+                            <option value="2">2 étoiles</option>
+                            <option value="3">3 étoiles</option>
+                            <option value="4">4 étoiles</option>
+                            <option value="5">5 étoiles</option>
+                        </select>
+                  
+                        <label for="texte">Texte</label>
+                        <textarea class="form-control" maxlength="255" id="texte" formControlName="texte" placeholder="Ajouter un Texte" required></textarea>
+                        <br>
+                      </div>
+                  
+                      <div class="formGroup d-flex justify-content-center">
+                        <button type="button" (click)="togglePopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                        <button type="submit" class="btn-ajouter ms-2">Ajouter</button>
+                      </div>
+                  </form>
+            </div>
+        </div>
+
+        <div class="search-container mt-4">
+            <div class="search-bar">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="  Rechercher ...">
+            </div>
+            <div class="icon-group">
+                <button class="icon-button" id="openPopup" (click)="togglePopup()"><i class="bi bi-plus-lg"></i></button>
+            </div>    
+        </div><br>
+
+        <div *ngFor="let avis of avisFiltres" class="review-card mb-3">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-person-circle me-3" style="font-size: 2em;"></i>
+                <div>
+                    <h6 class="mb-0">
+                        {{ getCandidatPrenomById(avis.id_candid) }} {{ getCandidatNomById(avis.id_candid) }} - {{ getEcoleNomById(avis.id_ecole) }}
+                    </h6>
+                    <small class="text-muted">Inscrit depuis le {{ getCandidatDateById(avis.id_candid) | date:'dd/MM/yyyy' }}</small>
+                </div>
+                <div class="ms-auto">
+                    <a><i class="bi bi-trash" (click)="openDeletePopup(avis.id_avis)"></i></a>
+                </div>
+            </div>
+            <div class="mt-2">
+                <span *ngFor="let star of getStars(avis.evaluation); let i = index">
+                    <i *ngIf="star === 1" class="bi bi-star-fill text-warning star-icon"></i>
+                    <i *ngIf="star === 0" class="bi bi-star text-warning star-icon"></i>
+                </span>
+                <span class="text-muted"> - {{ avis.date | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <p class="avis-texte">{{ avis.texte }}</p>
+        </div>
+    </div>
+
+    <div class="overlay-delete" [class.show]="showDeletePopup" (click)="toggleDeletePopup()"></div>
+    <div class="popup-delete text-center justify-content-center align-items-center" [class.show]="showDeletePopup">
+        <h3>Voulez-vous vraiment supprimer ?</h3>
+        <button class="btn-cancel" (click)="toggleDeletePopup()">Annuler</button>
+        <button class="btn-confirm" (click)="confirmDelete()">Confirmer</button>
+    </div>
+
+    <br><br><br><br>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des candidats</title>
+    <link href="admin-candidat.component.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="header1">
+            <span>
+                <i class="bi bi-person-fill"></i>
+                <a aria-current="page" routerLink="/admin/candidat" routerLinkActive="active" class="btn-link text-decoration-none">Liste des Candidats</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span>
+                <i class="bi bi-car-front-fill mx-1" style="font-weight: normal;"></i>
+                <a aria-current="page" routerLink="/admin/ecole" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Liste des Ecoles</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-book mx-1" style="font-weight: normal;"></i>  
+                <a aria-current="page" routerLink="/admin/exam" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Liste des Exams</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-chat-left-dots mx-1" style="font-weight: normal;"></i> 
+                <a aria-current="page" routerLink="/admin/avis" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Consulter les Avis</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-chat-left-dots mx-1" style="font-weight: normal;"></i> 
+                <a aria-current="page" routerLink="/admin/stats" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Consulter les Stats</a>
+            </span>
+
+                  
+            <div class="overlay" [class.show]="showPopup" (click)="togglePopup()"></div>
+            <div class="popup" [class.show]="showPopup">
+                <h2 class="mb-4 text-center">Ajouter un candidat</h2>
+                <form [formGroup]="ajoutform" (ngSubmit)="Ajouter()">
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="nom">Nom</label>
+                            <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Nom" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" class="form-control" id="prenom" formControlName="prenom" placeholder="Prénom" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="phone">Téléphone</label>
+                            <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="phone" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email" required>
+                        </div>
+                    </div>
+              
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" class="form-control" id="adresse" formControlName="adresse" placeholder="Adresse" required>
+                        </div>
+                    </div>
+              
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="date_naissance">Date de naissance</label>
+                            <input type="date" class="form-control" id="date_naissance" formControlName="date_naissance" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="auto_ecole">Nom de l'auto-école</label>
+                            <select class="form-control" id="auto_ecole" formControlName="id_ecole" required>
+                                <option value="" disabled selected>Choisissez une auto-école</option>
+                                <option *ngFor="let ecole of ecoles" [value]="ecole.id_ecole">
+                                    {{ ecole.id_ecole }} - {{ ecole.nom }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+              
+                    <div class="form-row d-flex justify-content-center align-items-center mt-4">
+                        <button type="button" (click)="togglePopup()" class="btn-annuler "  style="border: 2px solid #591FBF;">Annuler</button>
+                        <button type="submit" class="btn-ajouter ">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="overlay" [class.show]="showModifPopup" (click)="toggleModifPopup()"></div>
+            <div class="popup" [class.show]="showModifPopup">
+                <h2 class="mb-4 text-center">Modifier un candidat</h2>
+                <form [formGroup]="modifForm" (ngSubmit)="confirmModif()">
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="nom">Nom</label>
+                            <input type="text" class="form-control" id="nom2" formControlName="nom" placeholder="Nom" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" class="form-control" id="prenom2" formControlName="prenom" placeholder="Prénom" required>
+                        </div>
+                    </div>
+              
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="phone">Téléphone</label>
+                            <input type="text" class="form-control" id="phone2" formControlName="phone" placeholder="phone" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email2" formControlName="email" placeholder="Email" required>
+                        </div>
+                    </div>
+              
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password2" formControlName="password" placeholder="Mot de passe" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" class="form-control" id="adresse2" formControlName="adresse" placeholder="Adresse" required>
+                        </div>
+                    </div>
+              
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="date_naissance">Date de naissance</label>
+                            <input type="date" class="form-control" id="date_naissance2" formControlName="date_naissance" required>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="auto_ecole">Nom de l'auto-école</label>
+                            <select class="form-control" id="auto_ecole2" formControlName="id_ecole" required>
+                                <option value="" disabled selected>Choisissez une auto-école</option>
+                                <option *ngFor="let ecole of ecoles" [value]="ecole.id_ecole">
+                                    {{ ecole.id_ecole }} - {{ ecole.nom }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+              
+                    <div class="form-row d-flex justify-content-center align-items-center mt-4">
+                        <button type="button" (click)="toggleModifPopup()" class="btn-annuler me-2"  style="border: 2px solid #591FBF;">Annuler</button>
+                        <button type="submit" class="btn-ajouter ms-2">Modifier</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="overlay-delete" [class.show]="showDeletePopup" (click)="toggleDeletePopup()"></div>
+            <div class="popup-delete text-center justify-content-center align-items-center" [class.show]="showDeletePopup">
+                <h3>Voulez-vous vraiment supprimer ?</h3>
+                <button class="btn-cancel" (click)="toggleDeletePopup()">Annuler</button>
+                <button class="btn-confirm" (click)="confirmDelete()">Confirmer</button>
+            </div>
+        </div>
+
+        <div class="overlay" [class.show]="showTriPopup" (click)="toggleTriPopup()"></div>
+        <div class="popup1" [class.show]="showTriPopup">
+        <h2 class="mb-4 text-center">Rechercher par...</h2>
+        <form [formGroup]="triForm" (ngSubmit)="tri()">
+            <div class="form-single-column">
+                <div class="formGroup" id="formtri">
+                    <label for="nom">Candidat</label>
+                    <select class="form-control" id="nom_prenom3" formControlName="id_candid">
+                        <option value="" disabled selected>-- Sélectionnez un candidat --</option>
+                        <option *ngFor="let candidat of allCandidats" [value]="candidat.id_candid">
+                          {{ candidat.id_candid }} - {{ candidat.prenom }} - {{ candidat.nom }}
+                        </option>
+                      </select>
+          
+                    <label for="auto_ecole">Auto-école</label>
+                    <select class="form-control" id="auto_ecole3" formControlName="id_ecole">
+                        <option value="" disabled selected>-- Sélectionnez une auto-école --</option>
+                        <option *ngFor="let ecole of ecoles" [value]="ecole.id_ecole">
+                          {{ ecole.id_ecole }} - {{ ecole.nom }}
+                        </option>
+                      </select>
+                </div>
+          
+                <div class="d-flex justify-content-center text-center">
+                    <button type="button" (click)="toggleTriPopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                    <button type="submit" class="btn-ajouter ms-2">Appliquer</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <div class="search-container mt-4">
+            <div class="search-bar">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="  Rechercher ...">
+            </div>
+            <div class="icon-group">
+                <button class="icon-button" (click)="toggleTriPopup()"><i class="bi bi-funnel"></i></button>
+                <button class="icon-button" (click)="toggleDeletePopup()"><i class="bi bi-trash"></i></button>
+                <button class="icon-button" id="openPopup" (click)="togglePopup()"><i class="bi bi-plus-lg"></i></button>
+            </div>    
+        </div><br>
+
+        
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Téléphone</th>
+                        <th>Date d'inscription</th>
+                        <th>Auto-école</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr *ngFor="let candidat of candidats">
+                            <td><input type="checkbox" [(ngModel)]="candidat.selected"></td>
+                            <td>{{ candidat.prenom }}</td>
+                            <td>{{ candidat.nom }}</td>
+                            <td>{{ candidat.phone }}</td>
+                            <td>{{ candidat.date_inscription | date:'dd-MM-yyyy' }}</td>
+                            <td>{{ getEcoleNomById(candidat.id_ecole) }}</td>
+                            <td>{{ candidat.email }}</td>
+                            <td><a><i class="bi bi-pencil-fill" (click)="openModifPopup(candidat.id_candid)"></i></a></td>
+                        </tr>   
+                    </tbody>  
+            </table>
+        </div>
+    </div>
+
+    <br><br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

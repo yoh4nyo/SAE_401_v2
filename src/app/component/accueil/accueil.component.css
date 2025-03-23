@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Libre Franklin", sans-serif;
+    min-height: 100%;
+}
+
+/* Navbar */
+header {
+    height: 100px;
+}
+
+.nav-link {
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 600;
+    color:#190A34;
+}
+
+.nav-link:hover {
+    color: #190a34a6;
+}
+
+.eleve {
+    margin-left: auto;
+}
+
+.logo {
+    margin-left: 10px;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #5f47c2;
+    color: white;
+    overflow: hidden;
+}
+
+
+.hero-section h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+
+.hero-section h4 {
+    font-size: 30px; 
+    font-weight: bold;
+    color: inherit; 
+}
+
+p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.btn-custom {
+    background-color: #A4E8CC;
+    font-weight: bold;
+    color: #190A34;
+    width: 150px;
+}
+
+.btn-custom:hover {
+    background-color: #85BAA4;
+    color:#190A34;
+}
+
+i {
+    margin-right: 10px;
+}
+
+/* Rôle */
+h4 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 40px 20px;
+}
+
+/* Partenaires */
+.partners-section {
+    background-color: white;
+    padding: 40px 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.partners-slider {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.partner-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    min-width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.partner-image {
+    width: 220px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.partner-container:hover .partner-image {
+    transform: scale(1.05);
+}
+
+/* Trait séparation */
+.gradient-line {
+    height: 6px; 
+    background: linear-gradient(to right, #A4E8CC, transparent);
+    margin: auto;
+    max-width: 70%;
+}
+
+/* Carrousel des avis */
+.carousel-item {
+    text-align: left;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    background-color: #ffffff8e;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    opacity: 1; 
+}
+
+.carousel-control-prev i,
+.carousel-control-next i {
+    font-size: 2rem;
+    color: #190A34;
+}
+
+.carousel-control-prev {
+    left: -30px;
+}
+
+.carousel-control-next {
+    right: -40px;
+}
+
+.carousel-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.carousel-container {
+    padding-left: 20rem;
+    padding-right: 20rem;
+    margin-top: 2rem;
+}
+
+.avis-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.avis-info span {
+    font-weight: bold;
+}
+
+.avis-text {
+    font-size: 0.9rem;
+}
+
+.rating {
+    color: #6400f0;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.rating i {
+    margin-right: 2px;
+}
+
+.rating span {
+    margin-left: 5px;
+    font-size: 0.9rem;
+}
+
+.view-all-reviews {
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.view-all-reviews a {
+    text-decoration: underline;
+    color: #190A34;
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(135deg, #591FBF 0%, #290E59 100%);
+}
+
+.footer p, footer a {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.video-container-fluid video {
+    width: 100%;
+    max-width: 39rem;
+    margin-right: 0;
+}
+
+.video-container-fluid {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+@media (max-width: 767px) {
+    .video-container-fluid {
+        margin-top: 20px; 
+    }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des candidats</title>
+    <link rel="icon" type="image/png" href="/app_e2d/src/assets/img/logo_blanc.png">
+    <link href="accueil-avis.component.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container-fluid" style="background-color: #591FBF;">
+            <nav class="navbar navbar-expand-lg " >
+                <div class="container-fluid">
+                    <a routerLink="/accueil" routerLinkActive="active"><img class="navbar-brand" alt="logo E2D" src="assets/img/logo_blanc.png"  height="115px" /></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="search-container mt-4 mb-5">
+            <div class="search-bar">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="  Rechercher ...">
+            </div>
+            <div class="icon-group">
+                <button class="icon-button" (click)="toggleTriPopup()"><i class="bi bi-funnel"></i></button>    
+            </div>    
+        </div>
+        
+        <div *ngFor="let avis of aviss" class="review-card mb-3">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-person-circle me-3" style="font-size: 2em;"></i>
+                <div>
+                    <h6 class="mb-0">{{ getCandidatPrenomById(avis.id_candid) }} {{ getCandidatNomById(avis.id_candid) }} - {{ getEcoleNomById(avis.id_ecole) }}</h6>
+                    <small class="text-muted">Inscrit depuis le {{ getCandidatDateById(avis.id_candid) | date:'dd/MM/yyyy' }}</small>
+                </div>
+            </div>
+            <div class="mt-2">
+                <span *ngFor="let star of getStars(avis.evaluation); let i = index">
+                    <i *ngIf="star === 1" class="bi bi-star-fill text-warning star-icon"></i>
+                    <i *ngIf="star === 0" class="bi bi-star text-warning star-icon"></i>
+                </span>
+                <span class="text-muted"> - {{ avis.date | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <p class="avis-texte">{{ avis.texte }}</p>
+        </div>
+    </div>
+
+    <div class="overlay" [class.show]="showTriPopup" (click)="toggleTriPopup()"></div>
+    <div class="popup1" [class.show]="showTriPopup">
+    <h2 class="mb-4 text-center">Rechercher par...</h2>
+    <form [formGroup]="triForm" (ngSubmit)="tri()">
+        <div class="form-single-column">
+            <div class="formGroup" id="formtri">
+                <label for="nom">Candidat</label>
+                <select class="form-control" id="nom_prenom3" formControlName="id_candid">
+                    <option value="" disabled selected>-- Sélectionnez un candidat --</option>
+                    <option *ngFor="let candidat of candidats" [value]="candidat.id_candid">
+                      {{ candidat.id_candid }} - {{ candidat.prenom }} - {{ candidat.nom }}
+                    </option>
+                  </select>
+      
+                <label for="auto_ecole">Auto-école</label>
+                <select class="form-control" id="auto_ecole3" formControlName="id_ecole">
+                    <option value="" disabled selected>-- Sélectionnez une auto-école --</option>
+                    <option *ngFor="let ecole of ecoles" [value]="ecole.id_ecole">
+                      {{ ecole.id_ecole }} - {{ ecole.nom }}
+                    </option>
+                  </select>
+
+            </div><br>
+      
+            <div class="d-flex justify-content-center text-center">
+                <button type="button" (click)="toggleTriPopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                <button type="submit" class="btn-ajouter ms-2">Appliquer</button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    
+    <br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+    

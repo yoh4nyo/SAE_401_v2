@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des exams</title>
+    <link href="admin-exam.component.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="header1">
+
+            <span class="text-muted">
+                <i class="bi bi-person-fill" style="font-weight: normal;"></i>
+                <a aria-current="page" routerLink="/admin/candidat" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Liste des Candidats</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span>
+                <i class="bi bi-car-front-fill mx-1" style="font-weight: normal;"></i>
+                <a aria-current="page" routerLink="/admin/ecole" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Liste des Ecoles</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span>
+                <i class="bi bi-book mx-1"></i>
+                <a aria-current="page" routerLink="/admin/exam" routerLinkActive="active" class="btn-link text-decoration-none">Liste des Exams</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-chat-left-dots mx-1" style="font-weight: normal;"></i> 
+                <a aria-current="page" routerLink="/admin/avis" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Consulter les Avis</a>
+            </span>
+            <span class="mx-2">|</span>
+            <span class="text-muted">
+                <i class="bi bi-chat-left-dots mx-1" style="font-weight: normal;"></i> 
+                <a aria-current="page" routerLink="/admin/stats" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Consulter les Stats</a>
+            </span>
+
+            <div class="overlay" [class.show]="showPopup" (click)="togglePopup()"></div>
+            <div class="popup" [class.show]="showPopup">
+                <h2 class="mb-4 text-center">Ajouter un exam</h2>
+                <form [formGroup]="ajoutform" (ngSubmit)="Ajouter()">
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="nom">Nom Candidat</label>
+                            <select class="form-control" id="nom_prenom2" formControlName="id_candid" required>
+                                <option value="" disabled selected>Choisissez un candidat</option>
+                                <option *ngFor="let candidat of candidats" [value]="candidat.id_candid + '|' + candidat.id_ecole">
+                                  {{ candidat.prenom }} {{ candidat.nom }} - {{ candidat.id_candid }}
+                                </option>
+                              </select>
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="score">Score</label>
+                            <input type="number" class="form-control" id="score" min="0" min="40" formControlName="score" placeholder="Ajouter un Score entre 0 et 40"required>
+                        </div>
+                    </div>
+                  
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="telephone">Appréciation</label>
+                            <input type="text" class="form-control" id="appreciation" formControlName="appreciation" placeholder="Ajouter une appreciation"required>
+                          </div>
+                          <div class="formGroup col-md-6">
+                              <label for="type">Type</label>
+                              <select class="form-control" id="type" formControlName="type"required>
+                                  <option value="" disabled selected>Type</option>
+                                  <option value="Entrainement">Entrainement</option>
+                                  <option value="Exam Blanc">Exam Blanc</option>
+                              </select>
+                           </div>
+                        </div>
+                  
+                        <div class="form-row justify-content-center align-items-center">
+                            <div class="formGroup col-md-6">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" formControlName="date"required>
+                            </div>
+                            <div class="formGroup d-flex justify-content-center">
+                                <button type="button" (click)="togglePopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                                <button type="submit" class="btn-ajouter ms-2">Ajouter</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+
+            <div class="overlay" [class.show]="showModifPopup" (click)="toggleModifPopup()"></div>
+            <div class="popup" [class.show]="showModifPopup">
+                <h2 class="mb-4 text-center">Modifier un exam</h2>
+                <form [formGroup]="modifForm" (ngSubmit)="confirmModif()">
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="nom">Nom Candidat</label>
+                            <select class="form-control" id="nom_prenom2" formControlName="id_candid" >
+                                <option value="" disabled>Choisissez un candidat</option>
+                                <option *ngFor="let candidat of candidats" [value]="candidat.id_candid + '|' + candidat.id_ecole">
+                                    {{ candidat.prenom }} {{ candidat.nom }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="formGroup col-md-6">
+                          <label for="score">Score</label>
+                          <input type="number" class="form-control" id="score2" formControlName="score" placeholder="Ajouter un Score entre 0 et 40">
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="telephone">Appréciation</label>
+                            <input type="text" class="form-control" id="appreciation2" formControlName="appreciation" placeholder="Ajouter une appreciation">
+                        </div>
+                        <div class="formGroup col-md-6">
+                            <label for="type2">Type</label>
+                            <select class="form-control" id="type2" formControlName="type">
+                                <option value="" disabled selected>Type</option>
+                                <option value="Entrainement">Entrainement</option>
+                                <option value="Exam Blanc">Exam Blanc</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                    <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup col-md-6">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date2" formControlName="date">
+                        </div>
+                        <div class="formGroup d-flex justify-content-center">
+                            <button type="button" (click)="toggleModifPopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                            <button type="submit" class="btn-ajouter ms-2">Modifier</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="overlay-delete" [class.show]="showDeletePopup" (click)="toggleDeletePopup()"></div>
+            <div class="popup-delete text-center justify-content-center align-items-center" [class.show]="showDeletePopup">
+                <h3>Voulez-vous vraiment supprimer ?</h3>
+                <button class="btn-cancel" (click)="toggleDeletePopup()">Annuler</button>
+                <button class="btn-confirm" (click)="confirmDelete()">Confirmer</button>
+            </div>
+        </div>
+
+        <div class="overlay" [class.show]="showTriPopup" (click)="toggleTriPopup()"></div>
+        <div class="popup1" [class.show]="showTriPopup">
+        <h2 class="mb-4 text-center">Rechercher par...</h2>
+        <form [formGroup]="triForm" (ngSubmit)="tri()">
+            <div class="form-single-column">
+                <div class="formGroup" id="formtri">
+                    <label for="nom">Candidat</label>
+                    <select class="form-control" id="nom_prenom3" formControlName="id_candid">
+                        <option value="" disabled selected>-- Sélectionnez un candidat --</option>
+                        <option *ngFor="let candidat of candidats" [value]="candidat.id_candid">
+                          {{ candidat.id_candid }} - {{ candidat.prenom }} - {{ candidat.nom }}
+                        </option>
+                    </select><br>
+          
+                    <label for="auto_ecole">Auto-école</label>
+                    <select class="form-control" id="auto_ecole3" formControlName="id_ecole">
+                        <option value="" disabled selected>-- Sélectionnez une auto-école --</option>
+                        <option *ngFor="let ecole of ecoles" [value]="ecole.id_ecole">
+                          {{ ecole.id_ecole }} - {{ ecole.nom }}
+                        </option>
+                      </select><br>
+
+                      <label for="type3">Type</label>
+                      <select class="form-control" id="type3" formControlName="type">
+                        <option value="" disabled selected>Type</option>
+                        <option value="Entrainement">Entrainement</option>
+                        <option value="Exam Blanc">Exam Blanc</option>
+                    </select>
+                </div>
+          
+                <div class="d-flex justify-content-center text-center">
+                    <button type="button" (click)="toggleTriPopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                    <button type="submit" class="btn-ajouter ms-2">Appliquer</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <div class="search-container mt-4">
+            <div class="search-bar">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="  Rechercher ...">
+            </div>
+            <div class="icon-group">
+                <button class="icon-button" (click)="toggleTriPopup()"><i class="bi bi-funnel"></i></button>
+                <button class="icon-button" (click)="toggleDeletePopup()"><i class="bi bi-trash"></i></button>
+                <button class="icon-button" id="openPopup" (click)="togglePopup()"><i class="bi bi-plus-lg"></i></button>
+            </div>    
+        </div><br>
+        
+
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Score</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Appreciation</th>
+                        <th>Auto-ecole</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let exam of exams">
+                      <td><input type="checkbox" [(ngModel)]="exam.selected"></td>
+                      <td>{{ getCandidatPrenomById(exam.id_candid) }}</td>
+                      <td>{{ getCandidatNomById(exam.id_candid) }}</td>
+                      <td>{{ exam.score }}</td>
+                      <td>{{ exam.type }}</td>
+                      <td>{{ exam.date | date:'dd-MM-yyyy'}}</td>
+                      <td>{{ exam.appreciation }}</td>
+                      <td>{{ getEcoleNomById(exam.id_ecole) }}</td>
+                      <td><a><i class="bi bi-pencil-fill" (click)="openModifPopup(exam.id_exam)"></i></a></td>
+                   </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

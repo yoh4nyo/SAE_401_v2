@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+body {
+    font-family: "Libre Franklin", sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+}
+
+
+.eleve{
+    margin-left: auto;
+    margin-right: 100px;      
+}
+
+.logo {
+    margin-left: 80px;
+}
+
+.login-container {
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+h2 {
+    color: #190A34;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.form-control {
+    border: none;
+    box-shadow: none;
+    
+}
+.formGroup .form-control:focus {
+    border: none;
+    box-shadow: none;
+    
+}
+
+.btn-login {
+    background-color: #591FBF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-login:hover {
+    background-color: #3c187e;
+    color: white;
+}
+
+.form-text {
+    text-align: right;
+}
+ .form-check-label {
+    float: left;
+}
+
+.eye-icon {
+    cursor: pointer;
+    color: #190A34;
+}
+
+.header1 {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+}
+
+.header1 i {
+    color: #591FBF;
+}
+
+.header1 span {
+    display: flex;
+    align-items: center;
+}
+
+.navbar{
+    max-height: 65px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.nav-link{
+    color: white;
+}
+
+.header {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+}

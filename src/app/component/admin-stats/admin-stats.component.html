@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="admin-stats.component.css">
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="header1">
+        <span>
+            <i class="bi bi-person-fill"style="font-weight: normal;"></i>
+            <a aria-current="page" routerLink="/admin/candidat" routerLinkActive="active" class="btn-link text-decoration-none"style="font-weight: normal;">Liste des Candidats</a>
+        </span>
+        <span class="mx-2">|</span>
+        <span>
+            <i class="bi bi-car-front-fill mx-1" style="font-weight: normal;"></i>
+            <a aria-current="page" routerLink="/admin/ecole" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Liste des Ecoles</a>
+        </span>
+        <span class="mx-2">|</span>
+        <span class="text-muted">
+            <i class="bi bi-book mx-1" style="font-weight: normal;"></i>  
+            <a aria-current="page" routerLink="/admin/exam" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Liste des Exams</a>
+        </span>
+        <span class="mx-2">|</span>
+        <span class="text-muted">
+            <i class="bi bi-chat-left-dots mx-1" style="font-weight: normal;"></i> 
+            <a aria-current="page" routerLink="/admin/avis" routerLinkActive="active" class="btn-link text-decoration-none" style="font-weight: normal;">Consulter les Avis</a>
+        </span>
+        <span class="mx-2">|</span>
+        <span class="text-muted">
+            <i class="bi bi-chat-left-dots mx-1"></i>
+            <a aria-current="page" routerLink="/admin/stats" routerLinkActive="active" class="btn-link text-decoration-none">Consulter les Stats</a>
+        </span>
+    </div>
+    <div class="overlay" [class.show]="showTriPopup" (click)="toggleTriPopup()"></div>
+        <div class="popup1" [class.show]="showTriPopup">
+        <h2 class="mb-4 text-center">Rechercher par...</h2>
+        <form [formGroup]="triForm" (ngSubmit)="tri()">
+            <div class="form-single-column">
+                <div class="formGroup" id="formtri">
+                    <label for="nom">Candidat</label>
+                    <select class="form-control" id="nom_prenom3" formControlName="id_candid">
+                        <option value="" disabled selected>-- Sélectionnez un candidat --</option>
+                        <option *ngFor="let candidat of candidats" [value]="candidat.id_candid">
+                          {{ candidat.id_candid }} - {{ candidat.prenom }} - {{ candidat.nom }}
+                        </option>
+                      </select>
+                </div>
+          
+                <div class="d-flex justify-content-center text-center">
+                    <button type="button" (click)="toggleTriPopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
+                    <button type="submit" class="btn-ajouter ms-2">Appliquer</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <div class="search-container mt-4">
+            <div class="search-bar">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="  Rechercher ...">
+            </div>
+            <div class="icon-group">
+                <button class="icon-button" (click)="toggleTriPopup()"><i class="bi bi-funnel"></i></button>
+            </div>    
+        </div><br>
+    <h2 class="text-center" *ngIf="selectedCandidatName">Statistiques de: {{selectedCandidatName}}</h2>
+
+    <div *ngIf="selectedCandidat && stats?.semaine?.moyenne_examens! > 30" class="alert alert-success d-flex align-items-center" role="alert">
+        <i class="bi bi-check-circle-fill me-3" style="font-size: 2rem;"></i>
+        <div>
+            <h4 class="alert-heading mb-1">Ce candidat est éligible pour l'examen final du code de la route.</h4>
+            <p class="mb-0">Ces résultats sont excellents.</p>
+        </div>
+    </div>
+
+    <div *ngIf="selectedCandidat && stats?.semaine?.moyenne_examens! <= 30" class="alert alert-warning d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-3" style="font-size: 2rem;"></i>
+        <div>
+            <h4 class="alert-heading mb-1">Ce candidat n'est pas éligible pour l'examen final.</h4>
+            <p class="mb-0">Il doit continuer à s'entraîner et à s'améliorer.</p>
+        </div>
+    </div>
+
+    <div class="container mt-2">
+        <div class="stats-container">
+            <div class="d-flex align-items-center mb-5">
+                <h1 class="mb-0 me-5">Mes chiffres</h1>
+                <ul class="nav nav-tabs stats-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="week-tab" data-bs-toggle="tab" data-bs-target="#week" type="button" role="tab" aria-controls="week" aria-selected="true" (click)="changePeriod('semaine')">Semaine</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="month-tab" data-bs-toggle="tab" data-bs-target="#month" type="button" role="tab" aria-controls="month" aria-selected="false" (click)="changePeriod('mois')">Mois</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="total-tab" data-bs-toggle="tab" data-bs-target="#total" type="button" role="tab" aria-controls="total" aria-selected="false" (click)="changePeriod('total')">Total</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                    <div class="row" *ngIf="stats?.semaine">
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.semaine?.moyenne_entrainements }}/40</div>
+                            <div class="stat-label">Moyenne entrainements (Semaine)</div>
+                        </div>
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.semaine?.moyenne_examens }}/40</div>
+                            <div class="stat-label">Moyenne examens (Semaine)</div>
+                        </div>
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.semaine?.meilleure_note }}/40</div>
+                            <div class="stat-label">Meilleure note (Semaine)</div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="stats?.semaine">
+                        <div class="col-md-6 stat-item">
+                            <div class="stat-value">{{ stats?.semaine?.nombre_entrainements }}</div>
+                            <div class="stat-label">Nombre d'entrainements (Semaine)</div>
+                        </div>
+                        <div class="col-md-6 stat-item">
+                            <div class="stat-value">{{ stats?.semaine?.nombre_examens }}</div>
+                            <div class="stat-label">Nombre d'examens (Semaine)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">
+                    <div class="row" *ngIf="stats?.mois"> 
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.mois?.moyenne_entrainements }}/40</div>
+                            <div class="stat-label">Moyenne entrainements (Mois)</div>
+                        </div>
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.mois?.moyenne_examens }}/40</div>
+                            <div class="stat-label">Moyenne examens (Mois)</div>
+                        </div>
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.mois?.meilleure_note }}/40</div>
+                            <div class="stat-label">Meilleure note (Mois)</div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="stats?.mois">
+                        <div class="col-md-6 stat-item">
+                            <div class="stat-value">{{ stats?.mois?.nombre_entrainements }}</div>
+                            <div class="stat-label">Nombre d'entrainements (Mois)</div>
+                        </div>
+                        <div class="col-md-6 stat-item">
+                            <div class="stat-value">{{ stats?.mois?.nombre_examens }}</div>
+                            <div class="stat-label">Nombre d'examens (Mois)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="total" role="tabpanel" aria-labelledby="total-tab">
+                    <div class="row" *ngIf="stats?.total"> 
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.total?.moyenne_entrainements }}/40</div>
+                            <div class="stat-label">Moyenne entrainements (Total)</div>
+                        </div>
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.total?.moyenne_examens }}/40</div>
+                            <div class="stat-label">Moyenne examens (Total)</div>
+                        </div>
+                        <div class="col-md-4 stat-item">
+                            <div class="stat-value">{{ stats?.total?.meilleure_note }}/40</div>
+                            <div class="stat-label">Meilleure note (Total)</div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="stats?.total">
+                        <div class="col-md-6 stat-item">
+                            <div class="stat-value">{{ stats?.total?.nombre_entrainements }}</div>
+                            <div class="stat-label">Nombre d'entrainements (Total)</div>
+                        </div>
+                        <div class="col-md-6 stat-item">
+                            <div class="stat-value">{{ stats?.total?.nombre_examens }}</div>
+                            <div class="stat-label">Nombre d'examens (Total)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container mt-4">
+            <div class="d-flex align-items-center mb-3">
+                <h1 class="mb-0 me-3">Progression</h1>
+                <ul class="nav nav-tabs progress-tabs" id="progressTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="entrainements-tab" data-bs-toggle="tab" data-bs-target="#entrainements" type="button" role="tab" aria-controls="entrainements" aria-selected="true">Entrainements</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="examens-tab" data-bs-toggle="tab" data-bs-target="#examens" type="button" role="tab" aria-controls="examens" aria-selected="false">Examens blancs</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content" id="progressTabContent">
+                <div class="tab-pane fade show active" id="entrainements" role="tabpanel" aria-labelledby="entrainements-tab">
+                    <canvas #entrainementsChart id="entrainementsChart"></canvas>
+                </div>
+                <div class="tab-pane fade" id="examens" role="tabpanel" aria-labelledby="examens-tab">
+                    <canvas #examensChart id="examensChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
