@@ -10,10 +10,10 @@
 
 ## Utiliser notre code 
 - Commencer par créer la base de donnée `easy_drive` sur PhpMyAdmin puis importer le fichier `easy_drive.sql`
-- Déplacer le dosser `tp_api` dans le `htdocs` de xampp
+- Déplacer le dossier `tp_api` dans le `htdocs` de xampp
 - Créer un projet angular dans le `htdocs`
 - Installer les dépendances bootstrap, brcyptjs et express
-- Remplacer le src par défaut par notre src
+- Remplacer les fichiers par défaut projet par les notres
 - Puis `ng serve` pour lancer le serveur !
 
 ## Membres
