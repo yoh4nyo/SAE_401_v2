@@ -1,59 +1,55 @@
-# AppE2d
+# SAE401 - EASY TO DRIVE
+## Description du dépôt
+- Le lien du site
+- Le lien figma (regroupant le wireframe mobile, web, design system ainsi que le prototypage)
+- L'API
+- La BDD sql
+- Le src
+- Le compte rendu de la SAE
+- Les diagrammes (MCD, classe, cas d'utilisation)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+## Utiliser notre code 
+- Commencer par créer la base de donnée `easy_drive` sur PhpMyAdmin puis importer le fichier `easy_drive.sql`
+- Déplacer le dosser `tp_api` dans le `htdocs` de xampp
+- Créer un projet angular dans le `htdocs`
+- Installer les dépendances bootstrap, brcyptjs et express
+- Remplacer le src par défaut par notre src
+- Puis `ng serve` pour lancer le serveur !
 
-## Development server
+## Membres
+- Yannis Camelin
+- Alexandre Lopere
+- Yohan Som
+- Mathias Rakotomavo
 
-To start a local development server, run:
+## Lien vers le projet hébergé
+- [Lien vers le site](https://stylish.alwaysdata.net/php/login.php)
+- [Lien vers le dépôt GitHub](https://github.com/yoh4nyo/SAE401)
 
-```bash
-ng serve
-```
+## FIGMA
+- [Lien vers le wireframe](https://www.figma.com/design/MpRQMS2iaVRCIDW7pULDYt/EASY2DRIVE-WIREFRAME?node-id=0-1&t=rFpDVlu9HVmQXddE-1)
+- [Lien vers le prototypage](https://www.figma.com/proto/MpRQMS2iaVRCIDW7pULDYt/EASY2DRIVE-WIREFRAME?node-id=0-1&t=rFpDVlu9HVmQXddE-1)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Comment se connecter ? 
+**Administrateur**
+- Identifiant : admin
+- MDP : 1234
 
-## Code scaffolding
+**Candidat**
+- Identifiant : yannis.camelin@gmail.com
+- MDP : 1234
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Description
+L'objectif du projet est de concevoir une interface web permettant aux écoles d'enregistrer les candidats ainsi que leurs tests et examens blancs relatifs au code de la route. Cette interface doit également pouvoir calculer des statistiques accessibles aux candidats, telles que leurs scores, leurs échecs, leur éligibilité à l'examen final, etc.
 
-```bash
-ng generate component component-name
-```
+### Répartition des tâches
+- **Chef de projet** : Yannis Camelin
+- **Développeurs** : Yannis Camelin, Yohan Som, Mathias Rakotomavo
+- **UI/UX Designer** : Alexandre Lopere, Mathias Rakotomavo, Yohan Som
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Logiciels utilisés
+- **Trello** : Pour la gestion et le suivi des tâches
+- **GitHub** : Pour le dépôt
+- **XAMPP** : Pour la création de la base de donnée
+- **Visual Studio Code** : Pour le codage
+- **Figma** : Pour la création des maquettes, de la charte graphique et du prototypage.
