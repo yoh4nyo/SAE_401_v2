@@ -13,7 +13,7 @@
 - Déplacer le dossier `tp_api` dans le `htdocs` de xampp
 - Créer un projet angular dans le `htdocs`
 - Installer les dépendances bootstrap, brcyptjs et express
-- Remplacer les fichiers par défaut projet par les notres
+- Remplacer les fichiers par défaut du projet par les notre
 - Puis `ng serve` pour lancer le serveur !
 
 ## Membres
@@ -24,7 +24,7 @@
 
 ## Lien vers le projet hébergé
 - [Lien vers le site](https://yoh4nyo.github.io/SAE_401_v2/) (LE BACK N'EST PAS ENCORE RELIÉ / HÉBERGÉ)
-- [Lien vers le dépôt GitHub](https://github.com/yoh4nyo/SAE401)
+- [Lien vers le dépôt GitHub](https://github.com/yoh4nyo/SAE_402_v2)
 
 ## FIGMA
 - [Lien vers le wireframe](https://www.figma.com/design/MpRQMS2iaVRCIDW7pULDYt/EASY2DRIVE-WIREFRAME?node-id=0-1&t=rFpDVlu9HVmQXddE-1)
