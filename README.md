@@ -23,7 +23,7 @@
 - Mathias Rakotomavo
 
 ## Lien vers le projet hébergé
-- [Lien vers le site](https://yoh4nyo.github.io/SAE_401_v2/) (LE BACK N'EST PAS ENCORE RELIÉ / HÉBERGÉ)
+- [Lien vers le site](https://yoh4nyo.github.io/SAE_401_v2/) (BACK RELIÉ)
 - [Lien vers le dépôt GitHub](https://github.com/yoh4nyo/SAE_402_v2)
 
 ## FIGMA
