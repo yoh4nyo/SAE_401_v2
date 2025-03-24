@@ -1,6 +1,7 @@
 {
   "name": "app-e2d",
   "version": "0.0.0",
+  "homepage": "https://yoh4nyo.github.io/SAE_401_v2/accueil",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
