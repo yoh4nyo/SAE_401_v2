@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CandidatService {
-  private apiUrl = 'http://localhost/tp_api/api/candidat.php';
+  private apiUrl = 'https://mind.alwaysdata.net/tp_api/api/candidat.php';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class CandidatService {
   }
 
   deleteCandidats(ids: number[]): Observable<any> {
-    const url = 'http://localhost/tp_api/api/candidat.php';
+    const url = 'https://mind.alwaysdata.net/tp_api/api/candidat.phpp';
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       body: { ids } 

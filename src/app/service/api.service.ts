@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost/tp_api/api/login.php';
+  private apiUrl = 'https://mind.alwaysdata.net/tp_api/api/login.php';
   private isLoggedInUser = false;
   private userRole = '';
   private authToken = ''; 

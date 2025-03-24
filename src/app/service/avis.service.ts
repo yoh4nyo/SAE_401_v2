@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AvisService {
-  private apiUrl = 'http://localhost/tp_api/api/avis.php'; 
+  private apiUrl = 'https://mind.alwaysdata.net/tp_api/api/avis.php'; 
 
   constructor(private http: HttpClient) {}
 

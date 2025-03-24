@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
-
 body {
-    font-family: "Libre Franklin", sans-serif;
-    min-height: 100%;
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -236,4 +233,9 @@ h4 {
     .video-container-fluid {
         margin-top: 20px; 
     }
+}
+
+.formGroup {
+    width: 48%; 
+    margin-bottom: 15px;
 }

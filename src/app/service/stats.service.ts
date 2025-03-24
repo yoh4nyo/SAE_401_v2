@@ -9,7 +9,7 @@ import { StatsData } from '../models/stats-data';
 })
 export class StatsService {
 
-  private apiUrl = 'http://localhost/tp_api/api';  
+  private apiUrl = 'https://mind.alwaysdata.net/tp_api/api';  
 
   constructor(private http: HttpClient) {}
 

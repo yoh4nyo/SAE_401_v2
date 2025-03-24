@@ -24,7 +24,7 @@ export class LogoutService {
 
     this.apiService.logout(); 
 
-    return this.http.get('http://localhost/tp_api/api/logout.php', options).pipe(
+    return this.http.get('https://mind.alwaysdata.net/tp_api/api/logout.php', options).pipe(
       tap((response: any) => {
         if (response.success) {
           this.router.navigate(['/connexion']);

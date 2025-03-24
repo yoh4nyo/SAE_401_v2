@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
-
 
 body {
-    font-family: "Libre Franklin", sans-serif;
+
     position: relative;
     min-height: 100vh;
     margin: 0;
@@ -120,188 +118,7 @@ a {
     color: #591FBF;
     cursor: pointer;
 }
-/* STYLES POUR LE POPUP */
-.overlay,
-.popup {
-    display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-}
 
-.overlay {
-    background-color: rgba(0, 0, 0, 0.5); 
-    transition: opacity 0.3s ease-in-out; 
-}
-
-.popup {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease-out; 
-    width: 80%; 
-    max-width: 600px; 
-    max-height: 90%; 
-    box-sizing: border-box;
-    height: auto; 
-    left: 50%;
-    top: 50%;
-    position: fixed;
-    z-index: 1000;
-}
-
-.form-single-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-}
-
-.formGroup {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.popup label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.popup input[type="text"],
-.popup input[type="email"],
-.popup input[type="password"],
-.popup input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-}
-
-.popup input:focus {
-    border-color: #673AB7; 
-    outline: none; 
-}
-
-.popup button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-annuler {
-    background-color: #fff;
-    color: #673AB7;
-    border: 2px solid #673AB7;
-}
-
-.btn-annuler:hover {
-    background-color: #591FBF; 
-    color: white;
-}
-
-.btn-ajouter {
-    background-color: #673AB7;
-    color: #fff;
-}
-
-.btn-ajouter:hover {
-    background-color: #591FBF; 
-}
-
-.popup.show {
-    display: block;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.overlay.show {
-    display: block;
-    opacity: 1; 
-}
-
-/* STYLES POUR LE POPUP DE SUPPRESSION */
-.overlay-delete,
-.popup-delete {
-    visibility: hidden; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.overlay-delete {
-    background-color: rgba(0, 0, 0, 0.5); 
-}
-
-.popup-delete {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 600px;
-    max-height: 90%;
-    box-sizing: border-box;
-    height: auto;
-    left: 50%;
-    top: 50%;
-    position: fixed;
-    z-index: 1000;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-.popup-delete.show,
-.overlay-delete.show {
-    visibility: visible; 
-    opacity: 1; 
-}
-.popup-delete .btn-cancel,
-.popup-delete .btn-confirm {
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin: 5px; 
-}
-.popup-delete .btn-cancel {
-    background-color: #fff;
-    color: #673AB7;
-    border: 2px solid #673AB7;
-}
-.popup-delete .btn-confirm {
-    background-color: #673AB7;
-    color: #fff;
-}
-.popup-delete.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.popup-delete .btn-cancel:hover,
-.popup-delete .btn-confirm:hover {
-    background-color: #591FBF; 
-    color: white;
-}
-
-.popup-delete .btn-confirm:hover {
-    background-color: #3e149b;
-}
 
 .btn-cancel:hover {
     background-color: #591FBF; 
@@ -320,4 +137,8 @@ a {
   .review-card {
     border-bottom: 1px solid #ccc;
     padding-bottom: 15px;
+}
+.formGroup {
+    width: 48%; 
+    margin-bottom: 15px;
 }

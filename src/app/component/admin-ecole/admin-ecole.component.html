@@ -39,26 +39,30 @@
             <div class="popup" [class.show]="showPopup">
                 <h2 class="mb-4 text-center">Ajouter une école</h2>
                 <form [formGroup]="ajoutform" (ngSubmit)="Ajouter()">
-                    <div class="form-single-column">
+                        <div class="form-row justify-content-center align-items-center">
                         <div class="formGroup">
                             <label for="nom">Nom</label>
                             <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Ajouter un nom" required>
-                  
+                        </div>
+                        <div class="formGroup">
                             <label for="adresse">Adresse</label>
                             <input type="text" class="form-control" id="adresse" formControlName="adresse" placeholder="Ajouter une adresse" required>
-                  
+                        </div>
+                        </div>
+                        <div class="form-row justify-content-center align-items-center">
+                        <div class="formGroup">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ajouter un email" required>
-                  
+                        </div>
+                        <div class="formGroup">
                             <label for="phone">Téléphone</label>
                             <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Ajouter un numéro de téléphone" required>
                         </div>
-                  
-                        <div class="formGroup d-flex justify-content-center">
+                        </div>
+                        <div class="form-row d-flex justify-content-center align-items-center mt-4">
                             <button type="button" (click)="togglePopup()" class="btn-annuler me-2" style="border: 2px solid #673AB7;">Annuler</button>
                             <button type="submit" class="btn-ajouter ms-2">Ajouter</button>
                         </div>
-                    </div>
                 </form>
             </div>
 
